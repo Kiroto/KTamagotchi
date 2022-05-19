@@ -7,8 +7,6 @@ from classlib.console import Console
 gameDataFolder = GameDataFolder()
 
 def end():
-    inputstr= Console.getch()
-    print(inputstr)
     Console.printColorString("GoodBye")
     sleep(3)
 
@@ -19,6 +17,8 @@ def main():
     gameDataFolder.savePet(pet)
     pet.name = "Romeo"
     pet = gameDataFolder.loadPet()
+    Console.moveCursorXY(5, 5)
     Console.printColorString(pet.name, RGBColor(0xaaaaff))
+    Console.moveCursorXY(5, 6)
     Console.printColorString(pet.health, RGBColor(0x44ee66), RGBColor(0x111155))
     end()

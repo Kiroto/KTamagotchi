@@ -4,12 +4,18 @@ from classlib.opSys import OpSys, CURRENT_OS
 
 if CURRENT_OS == OpSys.WIN:
 	import msvcrt
+	from ctypes import *
+
+	STD_OUTPUT_HANDLE = -11
+
+	class COORD(Structure):
+		pass
+
+	COORD._fields_ = [("X", c_short), ("Y", c_short)]
 else:
 	import tty, termios, sys
 
 class Console():
-	KeyboardDecoder = "ascii"
-
 	@staticmethod
 	def clr_scr():
 		#Python program to clear screen
@@ -20,7 +26,20 @@ class Console():
 			cmd = 'clear'
 		os.system(cmd)
 
+	# ==================
+	# Navigation Methods
+	# ==================
+	@staticmethod
+	def moveCursorXY(xpos: int, ypos: int):
+		if CURRENT_OS == OpSys.WIN:
+			h = windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
+			windll.kernel32.SetConsoleCursorPosition(h, COORD(xpos, ypos))
+		else:
+			print(f"\033[{ypos};{xpos}H")
+
+	# =============
 	# Input Methods
+	# =============
 	@staticmethod
 	def getch():
 		chNo = -1
@@ -38,7 +57,9 @@ class Console():
 				termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 		return chNo
 
+	# =============
 	# Color Methods
+	# =============
 	@staticmethod
 	def setColor(fgHex: RGBColor):
 		print(f'\x1b[38;2;{fgHex.r};{fgHex.g};{fgHex.b}m', end="")
@@ -51,6 +72,9 @@ class Console():
 	def resetColor():
 		print('\033[m', end="")
 
+	# ==============
+	# Output Methods
+	# ==============
 	@staticmethod
 	def printColorString(text:str, fgHex: RGBColor = None, bgHex: RGBColor = None, end: str = None):
 		if (fgHex):
