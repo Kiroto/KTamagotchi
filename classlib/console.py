@@ -2,6 +2,8 @@ from enum import Enum
 import platform
 import os
 
+from classlib.rgbColor import RGBColor
+
 class OpSys(Enum):
 	UNK = -1,
 	WIN = 0,
@@ -35,6 +37,27 @@ class Console():
 	@staticmethod
 	def getch():
 		pass
+
+	@staticmethod
+	def setColor(fgHex: RGBColor):
+		print(f'\x1b[38;2;{fgHex.r};{fgHex.g};{fgHex.b}m', end="")
+
+	@staticmethod
+	def setBackground(bgHex: RGBColor):
+		print(f'\x1b[48;2;{bgHex.r};{bgHex.g};{bgHex.b}m', end="")
+
+	@staticmethod
+	def resetColor():
+		print('\033[m', end="")
+
+	@staticmethod
+	def printColorString(text:str, fgHex: RGBColor = None, bgHex: RGBColor = None, end: str = None):
+		if (fgHex):
+			Console.setColor(fgHex)
+		if (bgHex):
+			Console.setBackground(bgHex)
+		print(text, end=end)
+		Console.resetColor()
 
 if platform.system() == "Windows":
 	import msvcrt
