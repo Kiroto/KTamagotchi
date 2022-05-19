@@ -1,7 +1,7 @@
 from time import sleep
 from classlib.dataFolder import GameDataFolder
 from classlib.pet import Pet
-from classlib.utils.colorlib import RGBColor, printColorString, resetColor
+from classlib.utils.colorlib import RGBColor, printColorString
 
 gameDataFolder = GameDataFolder()
 
