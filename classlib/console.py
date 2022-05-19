@@ -1,43 +1,44 @@
-from enum import Enum
-import platform
 import os
-
 from classlib.rgbColor import RGBColor
+from classlib.opSys import OpSys, CURRENT_OS
 
-class OpSys(Enum):
-	UNK = -1,
-	WIN = 0,
-	LIN = 1,
-	OSX = 2
-
-def getSys():
-	sysStr = platform.system().lower()
-	sysDict = {
-		"windows": OpSys.WIN,
-		"mac": OpSys.OSX,
-		"linux": OpSys.LIN
-	}
-	if (sysStr in sysDict.keys()):
-		return sysDict[sysStr]
-	return OpSys.OSX
-
-currentOS = getSys()
+if CURRENT_OS == OpSys.WIN:
+	import msvcrt
+else:
+	import tty, termios, sys
 
 class Console():
+	KeyboardDecoder = "ascii"
+
 	@staticmethod
 	def clr_scr():
 		#Python program to clear screen
 		#Get command to execute
-		if(currentOS == OpSys.WIN):
+		if(CURRENT_OS == OpSys.WIN):
 			cmd = 'cls'
 		else:
 			cmd = 'clear'
 		os.system(cmd)
 
+	# Input Methods
 	@staticmethod
 	def getch():
-		pass
+		chNo = -1
+		if CURRENT_OS == OpSys.WIN:
+			ch = msvcrt.getch()
+			chNo = ord(ch)
+		else:
+			fd = sys.stdin.fileno()
+			old_settings = termios.tcgetattr(fd)
+			try:
+				tty.setraw(sys.stdin.fileno())
+				ch = sys.stdin.read(1)[0]
+				chNo = ord(ch)
+			finally:
+				termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+		return chNo
 
+	# Color Methods
 	@staticmethod
 	def setColor(fgHex: RGBColor):
 		print(f'\x1b[38;2;{fgHex.r};{fgHex.g};{fgHex.b}m', end="")
@@ -58,21 +59,3 @@ class Console():
 			Console.setBackground(bgHex)
 		print(text, end=end)
 		Console.resetColor()
-
-if platform.system() == "Windows":
-	import msvcrt
-	setattr(Console, "getch", msvcrt.getch)
-else:
-	import tty, termios, sys
-	def __getch():
-		fd = sys.stdin.fileno()
-		old_settings = termios.tcgetattr(fd)
-		try:
-			tty.setraw(sys.stdin.fileno())
-			ch = sys.stdin.read(1)
-		finally:
-			termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-		return ch
-	setattr(Console, "getch", __getch)
-
-

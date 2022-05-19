@@ -1,15 +1,14 @@
 from game import main
-from classlib.utils.colorlib import resetColor
 from classlib.console import Console
 
 
 def initialize():
-    resetColor()
+    Console.resetColor()
     Console.clr_scr()
 
 
 def finish():
-    resetColor()
+    Console.resetColor()
     Console.clr_scr()
 
 

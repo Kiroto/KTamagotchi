@@ -2,12 +2,12 @@ import pickle
 import os
 import re
 
-from classlib.console import OpSys, currentOS
+from classlib.console import OpSys, CURRENT_OS
 
 class File:
     def __init__(self, path: str):
         self.path:str = os.path.realpath(__file__)
-        if currentOS == OpSys.WIN:
+        if CURRENT_OS == OpSys.WIN:
             if (re.search("^([A-Z]:\\\\)", path)):
                 self.path: str = path
             else:
