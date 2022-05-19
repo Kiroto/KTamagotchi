@@ -1,16 +1,16 @@
 from game import main
 from classlib.utils.colorlib import resetColor
-from classlib.utils.consolequirks import clr_scr
+from classlib.console import Console
 
 
 def initialize():
     resetColor()
-    clr_scr()
+    Console.clr_scr()
 
 
 def finish():
     resetColor()
-    clr_scr()
+    Console.clr_scr()
 
 
 if __name__ == "__main__":

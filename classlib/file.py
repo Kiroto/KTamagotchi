@@ -1,8 +1,8 @@
-from locale import normalize
 import pickle
 import os
 import re
-from .utils.consolequirks import OpSys, currentOS
+
+from classlib.console import OpSys, currentOS
 
 class File:
     def __init__(self, path: str):

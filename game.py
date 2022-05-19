@@ -1,7 +1,8 @@
 from time import sleep
-from classlib.dataFolder import GameDataFolder
+from classlib.gameDataFolder import GameDataFolder
 from classlib.pet import Pet
 from classlib.utils.colorlib import RGBColor, printColorString
+from classlib.console import Console
 
 gameDataFolder = GameDataFolder()
 
@@ -18,4 +19,5 @@ def main():
     pet = gameDataFolder.loadPet()
     printColorString(pet.name, RGBColor(0xaaaaff))
     printColorString(pet.health, RGBColor(0x44ee66), RGBColor(0x111155))
+    Console.getch()
     end()

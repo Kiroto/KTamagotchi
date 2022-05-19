@@ -2,8 +2,6 @@ from enum import Enum
 import platform
 import os
 
-os.system('')
-
 class OpSys(Enum):
 	UNK = -1,
 	WIN = 0,
@@ -23,22 +21,27 @@ def getSys():
 
 currentOS = getSys()
 
-def clr_scr():
-    #Python program to clear screen
-    #Get command to execute
-    if(currentOS == OpSys.WIN):
-        cmd = 'cls'
-    else:
-        cmd = 'clear'
-    os.system(cmd)
+class Console():
+	@staticmethod
+	def clr_scr():
+		#Python program to clear screen
+		#Get command to execute
+		if(currentOS == OpSys.WIN):
+			cmd = 'cls'
+		else:
+			cmd = 'clear'
+		os.system(cmd)
+
+	@staticmethod
+	def getch():
+		pass
 
 if platform.system() == "Windows":
 	import msvcrt
-	def getch():
-		return msvcrt.getch()
+	setattr(Console, "getch", msvcrt.getch)
 else:
 	import tty, termios, sys
-	def getch():
+	def __getch():
 		fd = sys.stdin.fileno()
 		old_settings = termios.tcgetattr(fd)
 		try:
@@ -47,3 +50,6 @@ else:
 		finally:
 			termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 		return ch
+	setattr(Console, "getch", __getch)
+
+

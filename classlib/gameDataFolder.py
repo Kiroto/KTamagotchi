@@ -1,9 +1,7 @@
-from classlib.file import File
-
-
 import os
+from .file import File
+from .pet import Pet
 
-from classlib.pet import Pet
 
 class GameDataFolder():
     # Obtains the Game Data folder
