@@ -20,9 +20,9 @@ class File:
                 self.path = path
             else:
                 self.path += f"/{path}"
-        self.normalize()
+        self.__normalizePath()
 
-    def normalize(self):
+    def __normalizePath(self):
         layers = self.path.split("/")
         try:
             z = layers.index("/..")
