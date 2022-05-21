@@ -38,10 +38,7 @@ class PetEye:
 
 
 class PetEyeSet:
-    def __init__(self, petEyes: 'dict[EyeState, PetEye]', color: RGBColor = None):
-        if (color == None):
-            color = RGBColor(random() * 0xffffff)
-        self.color = color
+    def __init__(self, petEyes: 'dict[EyeState, PetEye]'):
         self.stateImages: dict[EyeState, PetEye] = petEyes
 
 petEyes : 'dict[str, PetEye]' = {

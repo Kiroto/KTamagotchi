@@ -15,10 +15,7 @@ class Expression(Enum):
 
 
 class PetFace:
-    def __init__(self, cheeks: PetCheeks, eyeset: PetEyeSet, mouthset: PetMouthSet, fur: RGBColor = None, furDensity: float = 0.1):
-        if (fur == None):
-            fur = RGBColor()
-        self.furColor: RGBColor = fur
+    def __init__(self, cheeks: PetCheeks, eyeset: PetEyeSet, mouthset: PetMouthSet, furDensity: float = 0.1):
         if (furDensity == None):
             furDensity = random()
         self.furDensity: float = furDensity
@@ -26,6 +23,14 @@ class PetFace:
         self.eyes: PetEyeSet = eyeset
         self.mouth: PetMouthSet = mouthset
         self.whiskers = "="
+
+        self.colors: dict[str, RGBColor] = {
+            "fur": RGBColor(random() * 0xffffff),
+            "mouth" : RGBColor(random() * 0xffffff),
+            "eyes": RGBColor(random() * 0xffffff),
+            "cheeks": RGBColor(random() * 0xffffff)
+        }
+
 
     EXPRESSION_DICT : 'dict[Expression, tuple[EyeState, MouthState]]' = {
         Expression.NEUTRAL : (EyeState.OPEN, MouthState.SMILE),
@@ -36,18 +41,24 @@ class PetFace:
 
     def getFace(self, expression: Expression = Expression.HAPPY) -> str:
         eyeState, mouthState = PetFace.EXPRESSION_DICT[expression]
+        
         eyes = self.eyes.stateImages[eyeState]
         mouth = self.mouth.stateImages[mouthState].sprite
-
         density = self.furDensity
         whiskers = self.whiskers
         cheeks = self.cheeks
-        furColor = self.furColor
-        defaultColor = Console.getFGColorString(furColor)
-        cheeksColor = Console.getFGColorString(
-            RGBColor.interpolate(cheeks.color, furColor, density))
-        mouthColor = Console.getFGColorString(
-            RGBColor.interpolate(self.mouth.color, furColor, density))
-        eyesColor = Console.getFGColorString(
-            RGBColor.interpolate(self.eyes.color, furColor, density))
-        return f"{defaultColor}{whiskers}{cheeksColor}{self.cheeks.left}{eyesColor}{eyes.getLooking(Direction.RIGHT)}{mouthColor}{mouth}{eyesColor}{eyes.getLooking(Direction.LEFT)}{cheeksColor}{cheeks.right}{defaultColor}{self.whiskers}"
+
+        furColor = self.colors["fur"]
+        cheekColor = self.colors["cheeks"]
+        mouthColor = self.colors["mouth"]
+        eyesColor = self.colors["eyes"]
+
+        furColorString = Console.getFGColorString(furColor)
+        cheekColorStrinig = Console.getFGColorString(
+            RGBColor.interpolate(cheekColor, furColor, density))
+        mouthColorString = Console.getFGColorString(
+            RGBColor.interpolate(mouthColor, furColor, density))
+        eyesColorString = Console.getFGColorString(
+            RGBColor.interpolate(eyesColor, furColor, density))
+
+        return f"{furColorString}{whiskers}{cheekColorStrinig}{self.cheeks.left}{eyesColorString}{eyes.getLooking(Direction.RIGHT)}{mouthColorString}{mouth}{eyesColorString}{eyes.getLooking(Direction.LEFT)}{cheekColorStrinig}{cheeks.right}{furColorString}{self.whiskers}"

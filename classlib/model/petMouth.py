@@ -20,10 +20,7 @@ class PetMouth:
         self.sprite = sprite
 
 class PetMouthSet:
-    def __init__(self, petMouth: 'dict[MouthState, PetMouth]', color: RGBColor = None):
-        if (color == None):
-            color = RGBColor(random() * 0xffffff)
-        self.color = color
+    def __init__(self, petMouth: 'dict[MouthState, PetMouth]'):
         self.stateImages: dict[MouthState, PetMouth] = petMouth
 
 

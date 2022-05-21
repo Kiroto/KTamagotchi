@@ -2,10 +2,7 @@ from random import random
 from classlib.rgbColor import RGBColor
 
 class PetCheeks:
-    def __init__(self, left: str, right: str, color: RGBColor = None) -> None:
-        if (color == None):
-            color = RGBColor(random() * 0xffffff)
-        self.color: RGBColor = color
+    def __init__(self, left: str, right: str) -> None:
         self.left: str = left
         self.right: str = right
 
