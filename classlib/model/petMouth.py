@@ -30,6 +30,7 @@ petMouths: 'dict[str, PetMouth]' = {
     "nervous": PetMouth(" ~ "),
     "smile": PetMouth(" v "),
     "bigSmile": PetMouth(" V "),
+    "content": PetMouth(" w "),
     "sad": PetMouth(" ^ "),
     "bigSad": PetMouth(" ^ "),
     "pout": PetMouth(".  "),
@@ -40,7 +41,7 @@ petMouthSets: 'dict[str, PetMouthSet]' = {
     "regular": PetMouthSet({
         MouthState.OPEN: petMouths["open"],
         MouthState.CLOSED: petMouths["closed"],
-        MouthState.SMILE: petMouths["smile"],
+        MouthState.SMILE: petMouths["content"],
         MouthState.BIG_SMILE: petMouths["bigSmile"],
         MouthState.SAD: petMouths["sad"],
         MouthState.BIG_SAD: petMouths["bigSad"],
