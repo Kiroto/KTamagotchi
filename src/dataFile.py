@@ -5,13 +5,16 @@ class DataFile:
     allPackages = pkgutil.walk_packages()
 
     def __init__(self: 'DataFile', path: str, preload: bool = False):
-        self.path = path
+        self.path = "./resources/" + path
         self.data: bytes = None
         if (preload):
             self.load()
 
     def fileName(self):
         return self.path.split(os.sep)[-1]
+
+    def extension(self):
+        return self.path.split(".")[-1]
 
     def load(self: 'DataFile', force : bool = False):
         if (self.data == None or force):

@@ -82,9 +82,9 @@ class File:
         with open(self.path, "wb") as file:
             pickle.dump(contents, file)
 
-    def pickleLoad(self) -> Pet:
+    def pickleLoad(self) -> object:
         with open(self.path, "rb") as file:
-            pet : Pet = pickle.load(file)
+            pet : object = pickle.load(file)
             return pet
 
-    
+
