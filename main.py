@@ -1,3 +1,4 @@
+from classlib.file import File
 from game import main
 from classlib.console import Console
 

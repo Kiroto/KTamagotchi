@@ -6,16 +6,18 @@ from classlib.console import OpSys, CURRENT_OS
 from classlib.model.pet import Pet
 
 class File:
+    BASE_FILE = os.getcwd()
     def __init__(self, path: str):
-        self.path:str = os.path.realpath(__file__)
+        path = path.replace("/", os.sep).replace("\\", os.sep)
+        self.path: str = os.path.realpath(File.BASE_FILE)
         if CURRENT_OS == OpSys.WIN:
-            if (re.search("^([A-Z]:\\\\)", path)):
-                self.path: str = path
+            if (re.search("^(([A-Z]|[a-z]):\\\\)", path)):
+                self.path = path
             else:
-                if (path.startswith("/")):
+                if (path.startswith("\\")):
                     self.path += path
                 else:
-                    self.path += f"/{path}"
+                    self.path += f"\\{path}"
         else:
             if (path.startswith("/")):
                 self.path = path
@@ -24,27 +26,32 @@ class File:
         self.__normalizePath()
 
     def __normalizePath(self):
-        layers = self.path.split("/")
+        layers = self.path.split(os.sep)
         try:
-            z = layers.index("/..")
+            prev = f"{os.sep}.."
+            z = layers.index(prev)
             while z >= 1:
                 layers.pop(z-1)
                 layers.pop(z-1)
-                z = layers.index("/..")
+                z = layers.index(prev)
         except ValueError:
             pass
 
         try:
-            z = layers.index("/.")
+            this = f"{os.sep}."
+            z = layers.index(this)
             while z >= 1:
                 layers.pop(z)
-                z = layers.index("/.")
+                z = layers.index(this)
         except ValueError:
             pass
-        self.path = "/".join(layers)
+        self.path = os.sep.join(layers)
 
-    def resolve(self, path):
+    def resolve(self, path) -> 'File':
         return File(os.path.join(self.path, path))
+
+    def parent(self) -> 'File':
+        return self.resolve("..")
 
     def exists(self):
         return os.path.exists(self.path)
@@ -79,5 +86,4 @@ class File:
             pet : Pet = pickle.load(file)
             return pet
 
-    def resolve(self, path: str):
-        return File(self.path + os.path.sep + path)
+    
