@@ -1,6 +1,5 @@
-from classlib.file import File
 from game import main
-from classlib.console import Console
+from src.console import Console
 
 
 def initialize():

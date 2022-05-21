@@ -1,10 +1,10 @@
 from random import random
-from classlib.model.petCheeks import petCheeks
-from classlib.model.petEyes import petEyeSets
-from classlib.model.petFace import PetFace
-from classlib.model.petMouth import petMouthSets
-from classlib.model.score import Score
-from classlib.rgbColor import RGBColor
+from src.model.petCheeks import petCheeks
+from src.model.petEyes import petEyeSets
+from src.model.petFace import PetFace
+from src.model.petMouth import petMouthSets
+from src.model.score import Score
+from src.rgbColor import RGBColor
 
 def randomFromList(thing: list):
     return list(thing)[int(random() * len(thing))]

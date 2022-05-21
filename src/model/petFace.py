@@ -1,10 +1,10 @@
 from enum import Enum
 from random import random
-from classlib.console import Console
-from classlib.model.petCheeks import PetCheeks
-from classlib.model.petEyes import Direction, EyeState, PetEyeSet
-from classlib.model.petMouth import MouthState, PetMouthSet
-from classlib.rgbColor import RGBColor
+from src.console import Console
+from src.model.petCheeks import PetCheeks
+from src.model.petEyes import Direction, EyeState, PetEyeSet
+from src.model.petMouth import MouthState, PetMouthSet
+from src.rgbColor import RGBColor
 
 
 class Expression(Enum):

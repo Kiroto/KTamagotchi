@@ -1,5 +1,3 @@
-from cgitb import reset
-import math
 from random import random
 
 class RGBColor():

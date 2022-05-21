@@ -1,6 +1,3 @@
-from random import random
-from classlib.rgbColor import RGBColor
-
 class PetCheeks:
     def __init__(self, left: str, right: str) -> None:
         self.left: str = left

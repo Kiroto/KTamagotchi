@@ -1,9 +1,9 @@
 from time import sleep
-from classlib.gameDataFolder import GameDataFolder
-from classlib.model.pet import Pet, randomFromList
-from classlib.model.petFace import PetFace
-from classlib.console import Console
-from classlib.soundEngine import SoundEngine, SoundFile
+from src.gameDataFolder import GameDataFolder
+from src.model.pet import Pet, randomFromList
+from src.model.petFace import PetFace
+from src.console import Console
+from src.soundEngine import SoundEngine, SoundFile
 
 gameDataFolder = GameDataFolder()
 
@@ -17,7 +17,7 @@ def main():
     while(Console.getch() != 3):
         pet = Pet()
         randomExpression = randomFromList(validExpressions)
-        SoundEngine.playAsync(SoundFile.CURSOR)
+        SoundEngine.playAsync(SoundFile.POWERUP)
         Console.print(pet.faceSet.getFace(randomExpression))
     # pet.name = "Batata"
     # Console.moveCursorXY(5, 5)

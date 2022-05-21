@@ -2,11 +2,12 @@ import pickle
 import os
 import re
 
-from classlib.console import OpSys, CURRENT_OS
-from classlib.model.pet import Pet
+from src.console import OpSys, CURRENT_OS
+from src.model.pet import Pet
 
 class File:
     BASE_FILE = os.getcwd()
+    DATA_FILE = f".{os.sep}data{os.sep}"
     def __init__(self, path: str):
         path = path.replace("/", os.sep).replace("\\", os.sep)
         self.path: str = os.path.realpath(File.BASE_FILE)

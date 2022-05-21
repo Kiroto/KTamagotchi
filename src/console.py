@@ -1,6 +1,6 @@
 import os
-from classlib.rgbColor import RGBColor
-from classlib.opSys import OpSys, CURRENT_OS
+from src.rgbColor import RGBColor
+from src.opSys import OpSys, CURRENT_OS
 
 if CURRENT_OS == OpSys.WIN:
 	import msvcrt

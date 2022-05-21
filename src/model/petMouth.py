@@ -1,8 +1,4 @@
 from enum import Enum
-from random import random
-
-from classlib.rgbColor import RGBColor
-
 
 class MouthState(Enum):
     OPEN = 0,
