@@ -3,6 +3,7 @@ import os
 import re
 
 from classlib.console import OpSys, CURRENT_OS
+from classlib.model.pet import Pet
 
 class File:
     def __init__(self, path: str):
@@ -73,9 +74,10 @@ class File:
         with open(self.path, "wb") as file:
             pickle.dump(contents, file)
 
-    def pickleLoad(self):
+    def pickleLoad(self) -> Pet:
         with open(self.path, "rb") as file:
-            return pickle.load(file)
+            pet : Pet = pickle.load(file)
+            return pet
 
     def resolve(self, path: str):
         return File(self.path + os.path.sep + path)

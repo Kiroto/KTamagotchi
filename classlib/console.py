@@ -60,13 +60,23 @@ class Console():
 	# =============
 	# Color Methods
 	# =============
+
+
+	@staticmethod
+	def getFGColorString(fgHex: RGBColor):
+		return f'\x1b[38;2{fgHex.consoleColorString()}m'
+
+	@staticmethod
+	def getBGColorString(bgHex: RGBColor):
+		return f'\x1b[48;2;{bgHex.consoleColorString()}m'
+
 	@staticmethod
 	def setColor(fgHex: RGBColor):
-		print(f'\x1b[38;2;{fgHex.r};{fgHex.g};{fgHex.b}m', end="")
+		print(Console.getFGColorString(fgHex), end="")
 
 	@staticmethod
 	def setBackground(bgHex: RGBColor):
-		print(f'\x1b[48;2;{bgHex.r};{bgHex.g};{bgHex.b}m', end="")
+		print(Console.getBGColorString(bgHex), end="")
 
 	@staticmethod
 	def resetColor():
@@ -76,7 +86,7 @@ class Console():
 	# Output Methods
 	# ==============
 	@staticmethod
-	def printColorString(text:str, fgHex: RGBColor = None, bgHex: RGBColor = None, end: str = None):
+	def print(text:str, fgHex: RGBColor = None, bgHex: RGBColor = None, end: str = None):
 		if (fgHex):
 			Console.setColor(fgHex)
 		if (bgHex):

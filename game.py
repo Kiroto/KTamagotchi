@@ -1,24 +1,25 @@
 from time import sleep
 from classlib.gameDataFolder import GameDataFolder
-from classlib.pet import Pet
+from classlib.model.pet import Pet, Score
 from classlib.rgbColor import RGBColor
 from classlib.console import Console
 
 gameDataFolder = GameDataFolder()
 
 def end():
-    Console.printColorString("GoodBye")
+    Console.print("GoodBye")
     sleep(3)
 
 
 def main():
     pet = Pet()
-    pet.name = "Bakkelito♦♣♠"
-    gameDataFolder.savePet(pet)
-    pet.name = "Romeo"
-    pet = gameDataFolder.loadPet()
-    Console.moveCursorXY(5, 5)
-    Console.printColorString(pet.name, RGBColor(0xaaaaff))
-    Console.moveCursorXY(5, 6)
-    Console.printColorString(pet.health, RGBColor(0x44ee66), RGBColor(0x111155))
+    Console.print(pet.faceSet.getFace())
+    # pet.name = "Batata"
+    # Console.moveCursorXY(5, 5)
+    # Console.print(pet.name, RGBColor(pet.color))
+    # Console.moveCursorXY(5, 6)
+    # health = pet.getHealth()
+    # ratio = health / Score.MAX_VALUE
+    # healthColor = RGBColor.interpolate(RGBColor(0xee3333), RGBColor(0x55ee55), ratio)
+    # Console.print(str(health), healthColor)
     end()

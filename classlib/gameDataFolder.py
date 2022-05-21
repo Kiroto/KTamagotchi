@@ -1,9 +1,10 @@
 import os
 from .file import File
-from .pet import Pet
+from .model.pet import Pet
 
 
 class GameDataFolder():
+    PET_FILENAME = "pet.ktpet"
     # Obtains the Game Data folder
     @staticmethod
     def getGameDataFolder():
@@ -18,13 +19,13 @@ class GameDataFolder():
         self.__initializeAppData()
 
     def savePet(self, pet: Pet):
-        petFile = self.file.resolve("pet.ktg")
+        petFile = self.file.resolve(GameDataFolder.PET_FILENAME)
         if not petFile.isFile():
             petFile.mkFile()
         petFile.pickleDump(pet)
 
     def loadPet(self):
-        petFile = self.file.resolve("pet")
+        petFile = self.file.resolve(GameDataFolder.PET_FILENAME)
         if not petFile.isFile():
             raise "No Pet File"
         loadedPet: Pet = petFile.pickleLoad()
