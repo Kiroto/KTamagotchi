@@ -1,6 +1,3 @@
-from random import random
-
-
 class RGBColor():
     @staticmethod
     def interpolate(a: 'RGBColor', b: 'RGBColor', value: float):

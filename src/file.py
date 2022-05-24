@@ -3,7 +3,6 @@ import os
 import re
 
 from src.console import OpSys, CURRENT_OS
-from src.model.pet import Pet
 
 class File:
     BASE_FILE = os.getcwd()
