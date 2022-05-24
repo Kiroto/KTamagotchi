@@ -14,7 +14,7 @@ class Pet:
     def __init__(self):
         self.name: str = "Mark"
 
-        self.color : RGBColor = RGBColor()
+        self.color : RGBColor = RGBColor(0x887766)
 
         self.faceSet: PetFace = PetFace(randomFromList(petCheeks.values()), randomFromList(
             petEyeSets.values()), randomFromList(petMouthSets.values()))

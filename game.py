@@ -1,4 +1,5 @@
 from time import sleep
+from src.consoleGui.consoleBox import ConsoleBox
 from src.gameDataFolder import GameDataFolder
 from src.model.pet import Pet, randomFromList
 from src.model.petFace import PetFace
@@ -15,6 +16,7 @@ def end():
 def main():
     validExpressions = list(PetFace.EXPRESSION_DICT.keys())
     SoundEngine.playBgm(AudioFile.MUSIC)
+    Console.draw(ConsoleBox.emptyBox(5, 5), 5, 5)
     while(Console.getch() != 3):
         pet = Pet()
         randomExpression = randomFromList(validExpressions)
